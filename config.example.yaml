@@ -1,0 +1,46 @@
+# AI Citation Audit — configuration
+# Copy to config.yaml and edit. Everything below is an illustrative example.
+
+business:
+  name: "Smith Auto Group"            # canonical name
+  type: "car dealership"              # used in query phrasing: "best [type] in ..."
+  unit_noun: "dealers"                # "name specific [unit_noun] if you can"
+  aliases:                            # any branding that still counts as YOUR citation
+    - "Smith Chevrolet"
+    - "BMW of Springfield"            # owned store branded without the group name
+  stores:                             # ground truth — verified each run before scoring
+    - name: "Smith Chevrolet Buick GMC"
+      city: "Springfield"
+      categories: ["Chevrolet", "Buick or GMC"]
+    - name: "BMW of Springfield"
+      city: "Springfield"
+      categories: ["BMW"]
+
+locations:                            # geographic framings to test
+  - "Springfield Missouri"
+  - "Branson Missouri"
+  - "Southwest Missouri"
+
+categories:                           # one query per category per location
+  - "BMW"
+  - "Chevrolet"
+  - "Buick or GMC"
+# A "group" query ("best car dealership in [location]") is always added automatically.
+
+competitors:                          # tracked for mention counts; verified each run
+  - name: "Jones Motor Company"
+    city: "Springfield"
+  - name: "Branson Auto Mall"
+    city: "Branson"
+
+engines:                              # comment out any you don't want
+  - chatgpt
+  - claude
+  - gemini
+  - grok
+  # - perplexity
+
+output:
+  local_folder: "Citation Audit"      # created under your working folder
+  cloud_drive_folder: ""              # optional: Google Drive/OneDrive folder name
+  keep_raw_responses: true
